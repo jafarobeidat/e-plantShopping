@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';  // Import useContext from React
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, updateQuantity } from './CreateSlice'; // Adjust the path as per your project structure
+import { removeItem, updateQuantity } from './CreatSlice'; // Adjust the path as per your project structure
 import './CartItem.css';
 
 

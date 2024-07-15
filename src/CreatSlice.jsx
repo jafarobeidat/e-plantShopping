@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import React, { useContext } from 'react'
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -27,7 +26,6 @@ const cartSlice = createSlice({
                 existingItem.quantity = quantity;
             }
         },
-        // Add other reducers as needed
     },
 });
 

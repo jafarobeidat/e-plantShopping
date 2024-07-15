@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import ProductList from './ProductList';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
-import AboutUs from './AboutUs';
+import ProductList from './ProductList';
+import CartItem from './CartItem'; // Make sure CartItem component is imported
+import AboutUs from './AboutUs'; // Assuming AboutUs component is imported
 
 function App() {
-    const [showProductList, setShowProductList] = useState(false);
+    const [showProductList, setShowProductList] = useState(false); // Start with productList hidden
 
     const handleGetStartedClick = () => {
-        setShowProductList(true);
+        setShowProductList(true); // Set showProductList to true to show productList
     };
 
     return (
         <Router>
             <div className="app-container">
+                {/* Landing Page */}
                 <div className={`landing-page ${showProductList ? 'fade-out' : ''}`}>
                     <div className="background-image"></div>
                     <div className="content">
@@ -30,13 +32,15 @@ function App() {
                         </div>
                     </div>
                 </div>
-                {showProductList && (
-                    <div className="product-list-container visible">
-                        <Routes>
-                            <Route path="/" element={<ProductList />} />
-                        </Routes>
-                    </div>
-                )}
+
+                {/* Product List */}
+                <div className={`product-list-container ${showProductList ? 'visible' : 'hidden'}`}>
+                    <Routes>
+                        <Route path="/" element={<ProductList />} />
+                        <Route path="/cartItem" element={<CartItem />} />
+                        {/* Add more routes as needed */}
+                    </Routes>
+                </div>
             </div>
         </Router>
     );
