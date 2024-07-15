@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';  // Import useContext from React
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, updateQuantity } from './CreateSlice'; // Adjust the path as per your project structure
 import './CartItem.css';
+
 
 const CartItem = ({ onContinueShopping }) => {
     const cart = useSelector(state => state.cart.items);
@@ -10,7 +11,7 @@ const CartItem = ({ onContinueShopping }) => {
     // Calculate total amount for all products in the cart
     const calculateTotalAmount = () => {
         let totalAmount = cart.reduce((total, item) => {
-            return total + (item.cost * item.quantity);
+            return total + (parseFloat(item.cost) * item.quantity); // Ensure cost is parsed as float
         }, 0);
         return totalAmount.toFixed(2);
     };
@@ -43,7 +44,7 @@ const CartItem = ({ onContinueShopping }) => {
 
     // Calculate total cost based on quantity for an item
     const calculateTotalCost = (item) => {
-        return (item.cost * item.quantity).toFixed(2);
+        return (parseFloat(item.cost) * item.quantity).toFixed(2); // Ensure cost is parsed as float
     };
 
     // Placeholder function for future checkout functionality
