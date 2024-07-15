@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';  // Import useContext from React
-import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, updateQuantity } from './CreatSlice'; // Adjust the path as per your project structure
-import './CartItem.css';
 
+// CartItem.jsx
+
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeItem, updateQuantity } from './CreatSlice';
+import './CartItem.css';
 
 const CartItem = ({ onContinueShopping }) => {
     const cart = useSelector(state => state.cart.items);
@@ -11,7 +13,7 @@ const CartItem = ({ onContinueShopping }) => {
     // Calculate total amount for all products in the cart
     const calculateTotalAmount = () => {
         let totalAmount = cart.reduce((total, item) => {
-            return total + (parseFloat(item.cost) * item.quantity); // Ensure cost is parsed as float
+            return total + (item.cost * item.quantity);
         }, 0);
         return totalAmount.toFixed(2);
     };
@@ -44,7 +46,8 @@ const CartItem = ({ onContinueShopping }) => {
 
     // Calculate total cost based on quantity for an item
     const calculateTotalCost = (item) => {
-        return (parseFloat(item.cost) * item.quantity).toFixed(2); // Ensure cost is parsed as float
+        const totalCost = item.cost * item.quantity;
+        return totalCost.toFixed(2);
     };
 
     // Placeholder function for future checkout functionality
@@ -61,7 +64,7 @@ const CartItem = ({ onContinueShopping }) => {
                         <img className="cart-item-image" src={item.image} alt={item.name} />
                         <div className="cart-item-details">
                             <div className="cart-item-name">{item.name}</div>
-                            <div className="cart-item-cost">Price: ${item.cost}</div>
+                            <div className="cart-item-cost">Price: ${item.cost.toFixed(2)}</div>
                             <div className="cart-item-quantity">
                                 <button className="cart-item-button cart-item-button-dec" onClick={() => handleDecrement(item)}>-</button>
                                 <span className="cart-item-quantity-value">{item.quantity}</span>

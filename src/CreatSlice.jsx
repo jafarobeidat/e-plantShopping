@@ -1,3 +1,5 @@
+// CreatSlice.jsx
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
@@ -12,7 +14,9 @@ const cartSlice = createSlice({
             if (existingItem) {
                 existingItem.quantity++;
             } else {
-                state.items.push({ name, image, cost, quantity: 1 });
+                // Parse cost to remove '$' and convert to float
+                const parsedCost = parseFloat(cost.replace('$', ''));
+                state.items.push({ name, image, cost: parsedCost, quantity: 1 });
             }
         },
         removeItem: (state, action) => {
